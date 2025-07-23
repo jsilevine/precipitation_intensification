@@ -1,0 +1,14 @@
+.DS_Store
+.idea
+*.log
+tmp/
+
+## large datafiles
+data/gs_first.tif
+data/gs_last.tif
+data/reanalysis
+data/model_objects
+data/traits_cleaned_3.csv
+
+## scratch code
+code/old

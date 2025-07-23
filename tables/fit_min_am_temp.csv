@@ -1,0 +1,6 @@
+"","Estimate","l-95% CI","u-95% CI","Rhat","Bulk_ESS","Tail_ESS"
+"Intercept",4.082,3.633,4.517,1.001,2726.971,2414.634
+"storm_freq_scaled",0.83,-0.105,1.914,1.002,1519.485,1436.793
+"map_reanalysis_scaled",-0.994,-2.038,0.043,1.003,1348.824,1840.538
+"mean_temp_scaled",0.636,0.022,1.291,1.002,1581.671,2243.104
+"storm_freq_scaled:map_reanalysis_scaled",0.821,0.434,1.17,1.001,2073.736,2340.103
