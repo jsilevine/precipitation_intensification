@@ -1,13 +1,31 @@
 ##---------------------------------------------------------------
-## WATER_AND_LIGHT_SIMULATOR -- meta_functions.jl
+## meta_functions.jl
 ##
-## By: Jacob Levine -- jacoblevine@princeton.edu
+## By: Jacob Levine -- jacob.levine@utah.edu
 ## November 2022
 ##
 ## This script defines functions used to perform analyses across environmental
 ## gradients, typically performing calculations over a range of environmental values
 ## for many communities.
 ##---------------------------------------------------------------
+
+Nspp = 30
+Niter = 10
+θ_fc = 0.2
+mintotal = 0.05
+maxtotal = 0.5
+lengthtotal = 40
+minP = 3
+maxP = 10
+lengthP = 4
+n_hts = 2
+E = 0.45
+uf = 0.1
+
+function w_psi(psi, wmin = 0.01, wmax = 0.05, psimin = -10, lambda = 1.5)
+    wmin + (wmax - wmin) * (psimin / psi) ^ lambda
+end
+
 
 """
     multi_eq(Nspp::Int64 = 10, Niter::Int64 = 10, θ_fc = 0.4,
@@ -28,24 +46,6 @@ calculations are performed are set by `mintototal`/`maxtotal` and `minP`/`maxP`,
 which to perform the calculations is specified by `lengthtotal` and `lengthP`. The `constant_ss` flag lets the
 user override the parameterization and dictate a constant storm size, which is provided by `ss`.
 """
-
-Nspp = 30
-Niter = 10
-θ_fc = 0.2
-mintotal = 0.05
-maxtotal = 0.5
-lengthtotal = 40
-minP = 3
-maxP = 10
-lengthP = 4
-n_hts = 2
-E = 0.45
-uf = 0.1
-
-function w_psi(psi, wmin = 0.01, wmax = 0.05, psimin = -10, lambda = 1.5)
-    wmin + (wmax - wmin) * (psimin / psi) ^ lambda
-end
-
 function multi_eq(;Nspp::Int64 = 10, Niter::Int64 = 10, θ_fc = 0.4,
                   mintotal::Float64 = 0.1, maxtotal::Float64 = 3.0,
                   lengthtotal::Int64 = 10,
@@ -80,18 +80,6 @@ function multi_eq(;Nspp::Int64 = 10, Niter::Int64 = 10, θ_fc = 0.4,
         sd_list = push!(sd_list, sdnew)
     end
 
-    # for i in 1:Niter
-    #     sdnew = generate_spp_data(Nspp = 30, Wmax = 0.7,
-    #                     n_ht = 1, T = 1.0 / ((15 - 1) / 2), F = F, μ = μ,
-    #                     b = 3.0, tradeoff_exp = 0.4,
-    #                     tradeoff_sd = 0.0, Aₘ = 0.25,
-    #                     r = 0.03, spread_multiplier = 1.5,
-    #                     exag = 5.0, min_δ = 1.0, max_δ = 20.0)
-    #     psi = -10.0 .+ (4.5 ./ sdnew.δ) .^ 0.7
-    #     sdnew.Wᵢ .= w_psi.(psi) ## delete these args if weird shit happens
-    #     sd_list = push!(sd_list, sdnew)
-    # end
-
     full_results = Array{Float64}(undef, Nspp*Niter, size(params)[1])
     biomass_results = Array{Float64}(undef, Nspp*Niter, size(params)[1])
     transpir_results = Array{Float64}(undef, Niter, size(params)[1])
@@ -105,9 +93,7 @@ function multi_eq(;Nspp::Int64 = 10, Niter::Int64 = 10, θ_fc = 0.4,
             spp_data.τ = calc_τ.(spp_data.Aₘ, spp_data.r, spp_data.α, spp_data.δ, F, μ, 1.0 / params[i,2], b)
             eqN = Vector(calc_eqN(spp_data, 1.0 / params[i,2], params[i,1], F, E, θ_fc, μ, false, false, uf, b)[:,:eqN])
             sub_results[[((j-1)*Nspp)+1:1:j*Nspp;]] = eqN
-           # eqB = calc_eq_biomass(spp_data,
-           #                       params[i, 1], E, 1.0 / params[i,2], F, μ, uf, θ_fc, false, b)
-           # biomass_sub[[((j-1)*Nspp)+1:1:j*Nspp;]] = eqB
+
             if sum(eqN .> 0.0) == 0
                 transpir_results[j,i] = 0
             else

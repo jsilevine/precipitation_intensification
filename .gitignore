@@ -4,11 +4,14 @@
 tmp/
 
 ## large datafiles
-data/gs_first.tif
-data/gs_last.tif
+data/growing_season
 data/reanalysis
 data/model_objects
-data/traits_cleaned_3.csv
+data/old
+data/geospatial
+
+## manuscript files
+manuscript/
 
 ## scratch code
 code/old

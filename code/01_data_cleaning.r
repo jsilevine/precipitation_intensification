@@ -1,19 +1,20 @@
-library(ggplot2)
-library(raster)
-library(cowplot)
+##---------------------------------------------------------------
+## 01_data_cleaning.r -- clean and prepare trait data
+##
+## author: jacob levine; jacob.levine@utah.edu
+##---------------------------------------------------------------
+
+##---------------------------------------------------------------
+## 00. Load required libraries and data
+##---------------------------------------------------------------
+
 library(measurements)
-library(mgcv)
-library(sf)
-library(evgam)
-library(lqmm)
-library(ncdf4)
-library(foreach)
-library(brms)
-library(metR)
-library(ggdist)
-library(doParallel)
 
 xylem <- read.csv("data/xylem_traits.csv")
+
+##---------------------------------------------------------------
+## 01. Clean and prepare the dataset
+##---------------------------------------------------------------
 
 # Filter the dataset to only include adult plant samples of stems (S) or petioles (P) from natural populations
 traits_full <- xylem[xylem[,"Natural...Greenhouse"] == "N" &
@@ -128,7 +129,3 @@ for (i in 1:nrow(traits_full)) {
 
 # Save the cleaned and processed dataset
 write.csv(traits_full, "data/traits_full.csv")
-
-
-nrow(traits_full[is.na(traits_full$P50) & is.na(traits_full$a_m),])
-nrow(traits_full)
