@@ -23,5 +23,5 @@ For questions or issues, please contact:
 
 + Name: *Jacob Levine*
 + Email: ~jacob.levine@utah.edu~
-+ GitHub: ~[[https://github.com/jsilevine]]~
++ GitHub: [[https://github.com/jsilevine]]
 + Website: [[levine-ecology.com]]
