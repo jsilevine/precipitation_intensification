@@ -1,4 +1,4 @@
-#+title: Code and Data for Manuscript: \Expanded plant hydraulic diversity with intensified precipitation\
+#+title: Code and Data for Manuscript: 'Expanded plant hydraulic diversity with intensified precipitation'
 #+author: Jacob I. Levine
 
 * Description
@@ -13,7 +13,7 @@ The repository is organized as follows:
 + =/figures= contains all output figure files, as well as Adobe Illustrator files used to polish the initial outputs.
 
 * Requirements
-To run the code, users must have updated distributions of both R (version \(>=\) 4.4.1) and julia (version \(>=\) 1.11.1). The =Manifest.toml= and =Project.toml= files contain all package version information for julia to ensure replicability. In general, statistical analyses were conducted in R, whereas theoretical and computational analyses were conducted in julia, for speed.
+To run the code, users must have updated distributions of both R (version >= 4.4.1) and julia (version >= 1.11.1). The =Manifest.toml= and =Project.toml= files contain all package version information for julia to ensure replicability. In general, statistical analyses were conducted in R, whereas theoretical and computational analyses were conducted in julia, for speed.
 
 * Authorship
 All the scripts contained in this database were written by Jacob I. Levine (@jsilevine). The manuscript was written by Jacob I. Levine, Jonathan M. Levine, William R. L. Anderegg, and Stephen W. Pacala. While Jacob wrote the scripts, each coauthor contributed to the ideas and workflows contained in this repository.
@@ -23,5 +23,5 @@ For questions or issues, please contact:
 
 + Name: *Jacob Levine*
 + Email: ~jacob.levine@utah.edu~
-+ GitHub: ~https://github.com/jsilevine~
++ GitHub: ~[[https://github.com/jsilevine]]~
 + Website: [[levine-ecology.com]]
